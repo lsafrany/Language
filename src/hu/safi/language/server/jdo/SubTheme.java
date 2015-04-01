@@ -10,20 +10,20 @@ import com.google.appengine.api.datastore.Key;
 @PersistenceCapable
 public class SubTheme {
 
-    @PrimaryKey
-    @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-    private Key key;
+	@PrimaryKey
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	private Key key;
 
-    @Persistent
-    private Key theme;
+	@Persistent
+	private Key theme;
 
-    @Persistent
-    private String name;
-   
-    public SubTheme(Key theme, String name) {
-        this.theme = theme;
-        this.name = name;
-    }
+	@Persistent
+	private String name;
+
+	public SubTheme(Key theme, String name) {
+		this.theme = theme;
+		this.name = name;
+	}
 
 	public Key getKey() {
 		return key;

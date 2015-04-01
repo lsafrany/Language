@@ -3,12 +3,12 @@ package hu.safi.language.shared.serialized;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class ItemSer extends ResultSer implements IsSerializable {
-		
-    private String key;    
-        
-    private String from;
-    
-    private String to;
+
+	private String key;
+
+	private String from;
+
+	private String to;
 
 	public String getKey() {
 		return key;
@@ -33,5 +33,5 @@ public class ItemSer extends ResultSer implements IsSerializable {
 	public void setTo(String to) {
 		this.to = to;
 	}
-	
+
 }

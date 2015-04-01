@@ -9,26 +9,26 @@ import com.google.appengine.api.datastore.Key;
 
 @PersistenceCapable
 public class Theme {
-    @PrimaryKey
-    @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-    private Key key;
+	@PrimaryKey
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	private Key key;
 
-    @Persistent
-    private String name;
+	@Persistent
+	private String name;
 
-    public Theme(String name) {
-        this.name = name;
-    }
+	public Theme(String name) {
+		this.name = name;
+	}
 
-    public Key getKey() {
-        return key;
-    }
+	public Key getKey() {
+		return key;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 }

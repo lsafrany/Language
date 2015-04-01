@@ -9,16 +9,16 @@ import com.google.appengine.api.datastore.Key;
 
 @PersistenceCapable
 public class Load {
-    @PrimaryKey
-    @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-    private Key key;
+	@PrimaryKey
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	private Key key;
 
-    @Persistent
-    private Boolean load;
+	@Persistent
+	private Boolean load;
 
-    public Load(Boolean load) {
-        this.load = load;
-    }
+	public Load(Boolean load) {
+		this.load = load;
+	}
 
 	public Key getKey() {
 		return key;
@@ -35,5 +35,5 @@ public class Load {
 	public void setLoad(Boolean load) {
 		this.load = load;
 	}
-    
+
 }

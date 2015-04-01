@@ -3,10 +3,10 @@ package hu.safi.language.shared.serialized;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class SubThemeSer extends ResultSer implements IsSerializable {
-		
-    private String key;    
-        
-    private String name;
+
+	private String key;
+
+	private String name;
 
 	public String getKey() {
 		return key;
@@ -15,7 +15,7 @@ public class SubThemeSer extends ResultSer implements IsSerializable {
 	public void setKey(String key) {
 		this.key = key;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -23,5 +23,5 @@ public class SubThemeSer extends ResultSer implements IsSerializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-  
+
 }
