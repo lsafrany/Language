@@ -485,6 +485,12 @@ public class Language implements EntryPoint {
 		Label emptyLabel = new Label("&nbsp;&nbsp");
 		buttonLayout.addMember(emptyLabel);
 
+		final IButton printButton = new IButton(ClientLabels.BUTTON_PRINT);
+		buttonLayout.addMember(printButton);
+
+		Label empty1Label = new Label("&nbsp;&nbsp");
+		buttonLayout.addMember(empty1Label);
+		
 		final IButton backButton = new IButton(ClientLabels.BUTTON_BACK);
 		buttonLayout.addMember(backButton);
 
@@ -494,6 +500,12 @@ public class Language implements EntryPoint {
 		addButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				additem(3, itemDataSource);
+			}
+		});
+
+		printButton.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				Canvas.showPrintPreview(mainLayout);
 			}
 		});
 

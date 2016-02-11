@@ -13,6 +13,7 @@ public class ClientLabels {
 	public static final String BUTTON_LIST = "Lista";
 	public static final String BUTTON_TEST = "Teszt";
 	public static final String BUTTON_BACK = "Vissza";
+	public static final String BUTTON_PRINT = "Nyomtatás";
 	public static final String BUTTON_TRANSLATE = "Fordítás";
 
 	public static final String ITEM = "Elemek";
