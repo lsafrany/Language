@@ -9783,5 +9783,4 @@ public class Kis_angol_nyelvtan {
 
 	}
 
-	
 }
