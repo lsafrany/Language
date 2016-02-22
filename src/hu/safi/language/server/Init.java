@@ -1,6 +1,6 @@
 // http://127.0.0.1:8888/language/init
 // http://language-hrd.appspot.com/language/init
-	
+
 package hu.safi.language.server;
 
 import hu.safi.language.server.jdo.Item;
@@ -27,8 +27,8 @@ public class Init extends HttpServlet {
 
 	private static final Logger log = Logger.getLogger(Init.class.getName());
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	@SuppressWarnings("unused")
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		log.info(new Date() + " start.");
 		response.setContentType("text/html; charset=UTF-8");
@@ -43,14 +43,12 @@ public class Init extends HttpServlet {
 		try {
 
 			Boolean needLoad = false;
-/*
-			Query loads = pm.newQuery(Load.class);
-			loads.deletePersistentAll();
-			Load load = new Load(true);
-			pm.makePersistent(load);
-*/
-			Query queryLoad = pm
-					.newQuery("select from " + Load.class.getName());
+			/*
+			 * Query loads = pm.newQuery(Load.class);
+			 * loads.deletePersistentAll(); Load load = new Load(true);
+			 * pm.makePersistent(load);
+			 */
+			Query queryLoad = pm.newQuery("select from " + Load.class.getName());
 			@SuppressWarnings("unchecked")
 			List<Load> loadList = (List<Load>) pm.newQuery(queryLoad).execute();
 			if (!loadList.isEmpty()) {
@@ -71,25 +69,21 @@ public class Init extends HttpServlet {
 
 				Theme theme2 = new Theme("Angol szavak és kifejezések");
 				pm.makePersistent(theme2);
-			
+
 				Query subThemes = pm.newQuery(SubTheme.class);
 				subThemes.deletePersistentAll();
 
-				Query queryTheme = pm.newQuery("select from "
-						+ Theme.class.getName());
+				Query queryTheme = pm.newQuery("select from " + Theme.class.getName());
 				@SuppressWarnings("unchecked")
-				List<Theme> themeList = (List<Theme>) pm.newQuery(queryTheme)
-						.execute();
+				List<Theme> themeList = (List<Theme>) pm.newQuery(queryTheme).execute();
 				if (!themeList.isEmpty()) {
 					for (Theme t : themeList) {
 						if (t.getName().equals("Kis angol nyelvtan")) {
-							SubTheme subTheme1 = new SubTheme(t.getKey(),
-									"Fordítási gyakorlat");
+							SubTheme subTheme1 = new SubTheme(t.getKey(), "Fordítási gyakorlat");
 							pm.makePersistent(subTheme1);
 						}
 						if (t.getName().equals("Angol szavak és kifejezések")) {
-							SubTheme subTheme1 = new SubTheme(t.getKey(),
-									"Első rész");
+							SubTheme subTheme1 = new SubTheme(t.getKey(), "Első rész");
 							pm.makePersistent(subTheme1);
 						}
 					}
@@ -98,44 +92,48 @@ public class Init extends HttpServlet {
 				Query items = pm.newQuery(Item.class);
 				items.deletePersistentAll();
 
-				Kis_angol_nyelvtan kis_angol_nyelvtan = new Kis_angol_nyelvtan();
-				
-				kis_angol_nyelvtan.forditasi_gyakorlat1(pm);
-				kis_angol_nyelvtan.forditasi_gyakorlat2(pm);
+				Kis_angol_nyelvtan__Forditasi_gyakorlat1 kis_angol_nyelvtan__Forditasi_gyakorlat1 = new Kis_angol_nyelvtan__Forditasi_gyakorlat1(
+						pm);
+				Kis_angol_nyelvtan__Forditasi_gyakorlat2 kis_angol_nyelvtan__Forditasi_gyakorlat2 = new Kis_angol_nyelvtan__Forditasi_gyakorlat2(
+						pm);
 
-				Angol_szavak_es_kifejezesek angol_szavak_es_kifejezesek = new Angol_szavak_es_kifejezesek();
-				angol_szavak_es_kifejezesek.elso_resz1(pm);
-				
-				Query resultSubThemes = pm.newQuery("select from "
-						+ SubTheme.class.getName());
+				Angol_szavak_es_kifejezesek__Elso_resz1 angol_szavak_es_kifejezesek__Elso_resz1 = new Angol_szavak_es_kifejezesek__Elso_resz1(
+						pm);
+				Angol_szavak_es_kifejezesek__Elso_resz2 angol_szavak_es_kifejezesek__Elso_resz2 = new Angol_szavak_es_kifejezesek__Elso_resz2(
+						pm);
+
+				Query resultSubThemes = pm.newQuery("select from " + SubTheme.class.getName());
 				@SuppressWarnings("unchecked")
-				List<SubTheme> resultSubThemesList = (List<SubTheme>) pm
-						.newQuery(resultSubThemes).execute();
+				List<SubTheme> resultSubThemesList = (List<SubTheme>) pm.newQuery(resultSubThemes).execute();
 				if (!resultSubThemesList.isEmpty()) {
 
 					for (SubTheme result : resultSubThemesList) {
 
-						Theme theme = pm.getObjectById(Theme.class,
-								result.getTheme());
+						Theme theme = pm.getObjectById(Theme.class, result.getTheme());
 
 						out.append("<h1>" + theme.getName() + "</h1>");
 						out.append("<h2>" + result.getName() + "</h1>");
 
-						Query subquery = pm.newQuery("select from "
-								+ Item.class.getName());
+						Query subquery = pm.newQuery("select from " + Item.class.getName());
 						subquery.setFilter("(subtheme == pSubTheme)");
 						subquery.declareParameters("String pSubTheme");
 						@SuppressWarnings("unchecked")
-						List<Item> list = (List<Item>) pm.newQuery(subquery)
-								.execute(result.getKey());
+						List<Item> list = (List<Item>) pm.newQuery(subquery).execute(result.getKey());
 						if (!list.isEmpty()) {
 							out.append("<table>");
 							for (Item it : list) {
-								out.append("<tr><td>" + it.getFrom() + " - "
-										+ it.getTo() + "</td></tr>");
+								out.append("<tr><td>" + it.getFrom() + " - " + it.getTo() + "</td></tr>");
 							}
 							out.append("</table>");
 						}
+					}
+				}
+
+				@SuppressWarnings("unchecked")
+				List<Load> loadnotneedList = (List<Load>) pm.newQuery(queryLoad).execute();
+				if (!loadnotneedList.isEmpty()) {
+					for (Load l : loadList) {
+						l.setLoad(Boolean.FALSE);
 					}
 				}
 
@@ -151,9 +149,8 @@ public class Init extends HttpServlet {
 		out.println();
 		log.info(new Date() + " stop.");
 	}
-	
-	public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
 }

@@ -22,8 +22,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
  * The server side implementation of the RPC service.
  */
 @SuppressWarnings("serial")
-public class LanguageServiceImpl extends RemoteServiceServlet implements
-		LanguageService {
+public class LanguageServiceImpl extends RemoteServiceServlet implements LanguageService {
 
 	public String codecheck(String code) throws IllegalArgumentException {
 		String result = "FALSE";
@@ -79,14 +78,12 @@ public class LanguageServiceImpl extends RemoteServiceServlet implements
 		return themeSer;
 	}
 
-	public ArrayList<SubThemeSer> subthemes(String theme)
-			throws IllegalArgumentException {
+	public ArrayList<SubThemeSer> subthemes(String theme) throws IllegalArgumentException {
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		ArrayList<SubThemeSer> subThemes = new ArrayList<SubThemeSer>();
 		try {
-			Query query = pm
-					.newQuery("select from " + SubTheme.class.getName());
+			Query query = pm.newQuery("select from " + SubTheme.class.getName());
 			query.setFilter("(theme == pTheme)");
 			query.declareParameters("String pTheme");
 
@@ -112,13 +109,12 @@ public class LanguageServiceImpl extends RemoteServiceServlet implements
 		return subThemes;
 	}
 
-	public SubThemeSer addSubTheme(String themeID, SubThemeSer subThemeSer)
-			throws IllegalArgumentException, ExceptionSer {
+	public SubThemeSer addSubTheme(String themeID, SubThemeSer subThemeSer) throws IllegalArgumentException, ExceptionSer {
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		try {
 
-			Theme theme = pm.getObjectById(Theme.class,KeyToID(themeID));
+			Theme theme = pm.getObjectById(Theme.class, KeyToID(themeID));
 			SubTheme subTheme = new SubTheme(theme.getKey(), subThemeSer.getName());
 			pm.makePersistent(subTheme);
 			subThemeSer.setKey(subTheme.getKey().toString());
@@ -132,8 +128,7 @@ public class LanguageServiceImpl extends RemoteServiceServlet implements
 		return subThemeSer;
 	}
 
-	public ArrayList<ItemSer> items(String subTheme)
-			throws IllegalArgumentException {
+	public ArrayList<ItemSer> items(String subTheme) throws IllegalArgumentException {
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		ArrayList<ItemSer> items = new ArrayList<ItemSer>();
@@ -142,9 +137,7 @@ public class LanguageServiceImpl extends RemoteServiceServlet implements
 			query.setFilter("(subtheme == pSubTheme)");
 			query.declareParameters("String pSubTheme");
 			@SuppressWarnings("unchecked")
-			List<Item> list = (List<Item>) pm.newQuery(query).execute(
-					pm.getObjectById(SubTheme.class, KeyToID(subTheme))
-							.getKey());
+			List<Item> list = (List<Item>) pm.newQuery(query).execute(pm.getObjectById(SubTheme.class, KeyToID(subTheme)).getKey());
 			if (!list.isEmpty()) {
 				for (Item i : list) {
 					ItemSer itemSer = new ItemSer();
@@ -165,13 +158,12 @@ public class LanguageServiceImpl extends RemoteServiceServlet implements
 		return items;
 	}
 
-	public ItemSer addItem(String subthemeID, ItemSer itemSer)
-			throws IllegalArgumentException, ExceptionSer  {
+	public ItemSer addItem(String subthemeID, ItemSer itemSer) throws IllegalArgumentException, ExceptionSer {
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		try {
 
-			SubTheme subTheme = pm.getObjectById(SubTheme.class,KeyToID(subthemeID));
+			SubTheme subTheme = pm.getObjectById(SubTheme.class, KeyToID(subthemeID));
 			Item item = new Item(subTheme.getKey(), itemSer.getFrom(), itemSer.getTo());
 			pm.makePersistent(item);
 			itemSer.setKey(item.getKey().toString());
@@ -185,8 +177,7 @@ public class LanguageServiceImpl extends RemoteServiceServlet implements
 		return itemSer;
 	}
 
-	public ArrayList<ItemSer> item(String subTheme)
-			throws IllegalArgumentException {
+	public ArrayList<ItemSer> item(String subTheme) throws IllegalArgumentException {
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		ArrayList<ItemSer> items = new ArrayList<ItemSer>();
@@ -195,12 +186,9 @@ public class LanguageServiceImpl extends RemoteServiceServlet implements
 			query.setFilter("(subtheme == pSubTheme)");
 			query.declareParameters("String pSubTheme");
 			@SuppressWarnings("unchecked")
-			List<Item> list = (List<Item>) pm.newQuery(query).execute(
-					pm.getObjectById(SubTheme.class, KeyToID(subTheme))
-							.getKey());
+			List<Item> list = (List<Item>) pm.newQuery(query).execute(pm.getObjectById(SubTheme.class, KeyToID(subTheme)).getKey());
 			if (!list.isEmpty()) {
-				Item item = list.get((int) Math.floor(Math.random()
-						* list.size()));
+				Item item = list.get((int) Math.floor(Math.random() * list.size()));
 				ItemSer itemSer = new ItemSer();
 				itemSer.setKey(item.getKey().toString());
 				itemSer.setFrom(item.getFrom());

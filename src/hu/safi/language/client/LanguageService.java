@@ -24,13 +24,11 @@ public interface LanguageService extends RemoteService {
 
 	List<SubThemeSer> subthemes(String theme) throws IllegalArgumentException;
 
-	SubThemeSer addSubTheme(String subTheme, SubThemeSer subThemeSer)
-			throws IllegalArgumentException, ExceptionSer;
+	SubThemeSer addSubTheme(String subTheme, SubThemeSer subThemeSer) throws IllegalArgumentException, ExceptionSer;
 
 	List<ItemSer> items(String subTheme) throws IllegalArgumentException;
 
-	ItemSer addItem(String subTheme, ItemSer itemSer)
-			throws IllegalArgumentException, ExceptionSer;
+	ItemSer addItem(String subTheme, ItemSer itemSer) throws IllegalArgumentException, ExceptionSer;
 
 	List<ItemSer> item(String subTheme) throws IllegalArgumentException;
 }

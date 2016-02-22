@@ -2,7 +2,7 @@
 <module rename-to='language'>
   <!-- Inherit the core Web Toolkit stuff.                        -->
   <inherits name='com.google.gwt.user.User'/>
-   <inherits name="com.smartgwt.SmartGwt"/>
+  <inherits name="com.smartgwt.SmartGwt"/>
    
   <!-- Specify the app entry point class.                         -->
   <entry-point class='hu.safi.language.client.Language'/>

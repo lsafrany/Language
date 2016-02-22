@@ -8,9 +8,10 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-public class Angol_szavak_es_kifejezesek {
+public class Angol_szavak_es_kifejezesek__Elso_resz2 {
 
-	public void elso_resz1(PersistenceManager pm) {
+	public Angol_szavak_es_kifejezesek__Elso_resz2(PersistenceManager pm) {
+		super();
 
 		Query querySubTheme = pm.newQuery("select from " + SubTheme.class.getName());
 		@SuppressWarnings("unchecked")
@@ -19,11 +20,12 @@ public class Angol_szavak_es_kifejezesek {
 			for (SubTheme s : subThemeList) {
 				if (s.getName().equals("Első rész")) {
 
-					Item item1 = new Item(s.getKey(), "régi,ódon,antik", "ancient");
-					Item item2 = new Item(s.getKey(), "blúz", "a blouse");
-					Item item3 = new Item(s.getKey(), "kabát", "a coat");
-					Item item4 = new Item(s.getKey(), "női ruha", "a dress");
-					Item item5 = new Item(s.getKey(), "zakó", "a jacket");
+					Item item1 = new Item(s.getKey(), "járatszám", "fight number");
+					Item item2 = new Item(s.getKey(), "bezsállókártya", "boarding card");
+					Item item3 = new Item(s.getKey(), "apáca", "a nun");
+					Item item4 = new Item(s.getKey(), "magányos, elhagyatott", "solitary");
+					Item item5 = new Item(s.getKey(), "fogság, kényszerű elszigeteltség", "confinement");
+/*					
 					Item item6 = new Item(s.getKey(), "pulóver", "a pullover");
 					Item item7 = new Item(s.getKey(), "ing", "a shirt");
 					Item item8 = new Item(s.getKey(), "öltöny", "a suit");
@@ -112,15 +114,16 @@ public class Angol_szavak_es_kifejezesek {
 					Item item91 = new Item(s.getKey(), "szerence, gazdagság", "furtune");
 					Item item92 = new Item(s.getKey(), "alapít", "to establish");
 					Item item93 = new Item(s.getKey(), "alapít, létesít", "to found");
-					
+*/
 					pm.makePersistent(item1);
 					pm.makePersistent(item2);
 					pm.makePersistent(item3);
-					pm.makePersistent(item4);				
-					pm.makePersistent(item5);		
-					pm.makePersistent(item6);		
-					pm.makePersistent(item7);		
-					pm.makePersistent(item8);		
+					pm.makePersistent(item4);
+					pm.makePersistent(item5);
+/*
+					pm.makePersistent(item6);
+					pm.makePersistent(item7);
+					pm.makePersistent(item8);
 					pm.makePersistent(item9);
 					pm.makePersistent(item10);
 					pm.makePersistent(item11);
@@ -205,8 +208,8 @@ public class Angol_szavak_es_kifejezesek {
 					pm.makePersistent(item90);
 					pm.makePersistent(item91);
 					pm.makePersistent(item92);
-					pm.makePersistent(item93);					
-					
+					pm.makePersistent(item93);
+*/
 				}
 			}
 		}

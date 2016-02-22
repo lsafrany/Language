@@ -21,7 +21,8 @@ public class ItemDataSource extends GwtRpcDataSource {
 	boolean full = true;
 
 	String subtheme_key = "";
-	
+
+	@SuppressWarnings("deprecation")
 	public ItemDataSource(boolean mode) {
 
 		TextItem textItem = new TextItem();
@@ -30,20 +31,17 @@ public class ItemDataSource extends GwtRpcDataSource {
 		this.full = mode;
 		DataSourceField field;
 
-		field = new DataSourceTextField(ClientConstants.ITEM_KEY,
-				ClientLabels.ITEM_KEY);
+		field = new DataSourceTextField(ClientConstants.ITEM_KEY, ClientLabels.ITEM_KEY);
 		field.setPrimaryKey(true);
 		field.setHidden(true);
 		addField(field);
 
-		field = new DataSourceTextField(ClientConstants.ITEM_FROM,
-				ClientLabels.ITEM_FROM);
+		field = new DataSourceTextField(ClientConstants.ITEM_FROM, ClientLabels.ITEM_FROM);
 		field.setRequired(true);
 		field.setEditorType(textItem);
 		addField(field);
 
-		field = new DataSourceTextField(ClientConstants.ITEM_TO,
-				ClientLabels.ITEM_TO);
+		field = new DataSourceTextField(ClientConstants.ITEM_TO, ClientLabels.ITEM_TO);
 		field.setRequired(true);
 		field.setEditorType(textItem);
 		addField(field);
@@ -51,66 +49,53 @@ public class ItemDataSource extends GwtRpcDataSource {
 	}
 
 	@Override
-	protected void executeFetch(final String requestId,
-			final DSRequest request, final DSResponse response) {
-		subtheme_key = request.getCriteria().getAttribute(
-				ClientConstants.SUBTHEME_KEY);
+	protected void executeFetch(final String requestId, final DSRequest request, final DSResponse response) {
+		subtheme_key = request.getCriteria().getAttribute(ClientConstants.SUBTHEME_KEY);
 		if (full) {
-			languageService.items(
-					subtheme_key,
-					new AsyncCallback<List<ItemSer>>() {
-						public void onFailure(Throwable caught) {
-							response.setStatus(RPCResponse.STATUS_FAILURE);
-							processResponse(requestId, response);
-						}
+			languageService.items(subtheme_key, new AsyncCallback<List<ItemSer>>() {
+				public void onFailure(Throwable caught) {
+					response.setStatus(RPCResponse.STATUS_FAILURE);
+					processResponse(requestId, response);
+				}
 
-						public void onSuccess(List<ItemSer> result) {
-							ListGridRecord[] list = new ListGridRecord[result
-									.size()];
-							if ((result.size() > 0)
-									&& (result.get(0).getError() != null))
-								response.setAttribute(ClientConstants.ERROR,
-										result.get(0).getError());
-							for (int i = 0; i < list.length; i++) {
-								ListGridRecord record = new ListGridRecord();
-								copyValues(result.get(i), record);
-								list[i] = record;
-							}
-							response.setData(list);
-							processResponse(requestId, response);
-						}
-					});
+				public void onSuccess(List<ItemSer> result) {
+					ListGridRecord[] list = new ListGridRecord[result.size()];
+					if ((result.size() > 0) && (result.get(0).getError() != null))
+						response.setAttribute(ClientConstants.ERROR, result.get(0).getError());
+					for (int i = 0; i < list.length; i++) {
+						ListGridRecord record = new ListGridRecord();
+						copyValues(result.get(i), record);
+						list[i] = record;
+					}
+					response.setData(list);
+					processResponse(requestId, response);
+				}
+			});
 		} else {
-			languageService.item(
-					subtheme_key,
-					new AsyncCallback<List<ItemSer>>() {
-						public void onFailure(Throwable caught) {
-							response.setStatus(RPCResponse.STATUS_FAILURE);
-							processResponse(requestId, response);
-						}
+			languageService.item(subtheme_key, new AsyncCallback<List<ItemSer>>() {
+				public void onFailure(Throwable caught) {
+					response.setStatus(RPCResponse.STATUS_FAILURE);
+					processResponse(requestId, response);
+				}
 
-						public void onSuccess(List<ItemSer> result) {
-							ListGridRecord[] list = new ListGridRecord[result
-									.size()];
-							if ((result.size() > 0)
-									&& (result.get(0).getError() != null))
-								response.setAttribute(ClientConstants.ERROR,
-										result.get(0).getError());
-							for (int i = 0; i < list.length; i++) {
-								ListGridRecord record = new ListGridRecord();
-								copyValues(result.get(i), record);
-								list[i] = record;
-							}
-							response.setData(list);
-							processResponse(requestId, response);
-						}
-					});
+				public void onSuccess(List<ItemSer> result) {
+					ListGridRecord[] list = new ListGridRecord[result.size()];
+					if ((result.size() > 0) && (result.get(0).getError() != null))
+						response.setAttribute(ClientConstants.ERROR, result.get(0).getError());
+					for (int i = 0; i < list.length; i++) {
+						ListGridRecord record = new ListGridRecord();
+						copyValues(result.get(i), record);
+						list[i] = record;
+					}
+					response.setData(list);
+					processResponse(requestId, response);
+				}
+			});
 		}
 	}
 
 	@Override
-	protected void executeAdd(final String requestId, final DSRequest request,
-			final DSResponse response) {
+	protected void executeAdd(final String requestId, final DSRequest request, final DSResponse response) {
 
 		JavaScriptObject data = request.getData();
 		ListGridRecord rec = new ListGridRecord(data);
@@ -135,14 +120,12 @@ public class ItemDataSource extends GwtRpcDataSource {
 	}
 
 	@Override
-	protected void executeUpdate(final String requestId,
-			final DSRequest request, final DSResponse response) {
+	protected void executeUpdate(final String requestId, final DSRequest request, final DSResponse response) {
 
 	}
 
 	@Override
-	protected void executeRemove(final String requestId,
-			final DSRequest request, final DSResponse response) {
+	protected void executeRemove(final String requestId, final DSRequest request, final DSResponse response) {
 
 	}
 

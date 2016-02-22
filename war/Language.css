@@ -1,4 +1,43 @@
-.error
-{
-	color : red;
-} 
+
+/*============================================================
+	ListGrid cells
+		listGrid.baseStyle
+============================================================*/
+
+/*------------------------------------------------------------
+		listGrid.baseStyle
+------------------------------------------------------------*/
+.largerText,
+.largerTextDark {
+	font-family:Arial,Verdana,sans-serif; font-size:18px; text-overflow:ellipsis;
+	color:black;
+    border-top: 1px solid #FAFAFA;
+    border-bottom:1px solid #EDEDED;
+}
+
+.largerTextOver,
+.largerTextOverDark {
+	font-family:Arial,Verdana,sans-serif; font-size:18px; text-overflow:ellipsis;
+	color:black;
+    border-top: 1px solid #FAFAFA;
+    border-bottom:1px solid #EDEDED;
+    background:#D3E0F6;
+}
+
+.largerTextSelected,
+.largerTextSelectedDark {
+	font-family:Arial,Verdana,sans-serif; font-size:18px; text-overflow:ellipsis;
+	color:black;
+    border-top: 1px solid #FAFAFA;
+    border-bottom:1px solid #EDEDED;
+    background:#BBD2F5;
+}
+
+.largerTextSelectedOver,
+.largerTextSelectedOverDark {
+	font-family:Arial,Verdana,sans-serif; font-size:18px; text-overflow:ellipsis;
+	color:black;
+    border-top: 1px solid #FAFAFA;
+    border-bottom:1px solid #EDEDED;
+    background:#91B7F5;
+}

@@ -38,8 +38,7 @@ import com.smartgwt.client.widgets.layout.VLayout;
  */
 public class Language implements EntryPoint {
 
-	private final LanguageServiceAsync languageService = GWT
-			.create(LanguageService.class);
+	private final LanguageServiceAsync languageService = GWT.create(LanguageService.class);
 
 	private String translate = "";
 
@@ -68,6 +67,7 @@ public class Language implements EntryPoint {
 		final ListGrid themeGrid = new ListGrid();
 		themeGrid.setWidth("40%");
 		themeGrid.setHeight("80%");
+		themeGrid.setBaseStyle("largerText");
 		themeGrid.setTitle(ClientLabels.THEME);
 		themeGrid.setShowAllRecords(true);
 
@@ -79,10 +79,8 @@ public class Language implements EntryPoint {
 			}
 
 			@Override
-			protected void transformResponse(DSResponse response,
-					DSRequest request, Object data) {
-				if (response.getStatus() == RPCResponse.STATUS_FAILURE
-						|| response.getAttribute(ClientConstants.ERROR) != null) {
+			protected void transformResponse(DSResponse response, DSRequest request, Object data) {
+				if (response.getStatus() == RPCResponse.STATUS_FAILURE || response.getAttribute(ClientConstants.ERROR) != null) {
 					DisplayRequest.serverError();
 					if (response.getAttribute(ClientConstants.ERROR) != null)
 						SC.warn(response.getAttribute(ClientConstants.ERROR));
@@ -99,6 +97,7 @@ public class Language implements EntryPoint {
 		final ListGrid subThemeGrid = new ListGrid();
 		subThemeGrid.setWidth("40%");
 		subThemeGrid.setHeight("80%");
+		subThemeGrid.setBaseStyle("largerText");
 		subThemeGrid.setTitle(ClientLabels.SUBTHEME);
 		subThemeGrid.setShowAllRecords(true);
 
@@ -110,10 +109,8 @@ public class Language implements EntryPoint {
 			}
 
 			@Override
-			protected void transformResponse(DSResponse response,
-					DSRequest request, Object data) {
-				if (response.getStatus() == RPCResponse.STATUS_FAILURE
-						|| response.getAttribute(ClientConstants.ERROR) != null) {
+			protected void transformResponse(DSResponse response, DSRequest request, Object data) {
+				if (response.getStatus() == RPCResponse.STATUS_FAILURE || response.getAttribute(ClientConstants.ERROR) != null) {
 					DisplayRequest.serverError();
 					if (response.getAttribute(ClientConstants.ERROR) != null)
 						SC.warn(response.getAttribute(ClientConstants.ERROR));
@@ -182,11 +179,12 @@ public class Language implements EntryPoint {
 		themeGrid.addRecordClickHandler(new RecordClickHandler() {
 			public void onRecordClick(RecordClickEvent event) {
 				Criteria criteria = new Criteria();
-				String themeKey = event.getRecord().getAttributeAsString(
-						ClientConstants.THEME_KEY);
+				String themeKey = event.getRecord().getAttributeAsString(ClientConstants.THEME_KEY);
 				criteria.addCriteria(ClientConstants.THEME_KEY, themeKey);
 				subThemeGrid.fetchData(criteria);
 				addsubthemaButton.setDisabled(false);
+				listButton.setDisabled(true);
+				testButton.setDisabled(true);
 			}
 		});
 
@@ -219,8 +217,7 @@ public class Language implements EntryPoint {
 		listButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				if (subThemeGrid.getSelectedRecord() != null) {
-					list(mainLayout, subThemeGrid.getSelectedRecord()
-							.getAttributeAsString(ClientConstants.SUBTHEME_KEY));
+					list(mainLayout, subThemeGrid.getSelectedRecord().getAttributeAsString(ClientConstants.SUBTHEME_KEY));
 				}
 			}
 		});
@@ -228,8 +225,7 @@ public class Language implements EntryPoint {
 		testButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				if (subThemeGrid.getSelectedRecord() != null) {
-					test(mainLayout, subThemeGrid.getSelectedRecord()
-							.getAttributeAsString(ClientConstants.SUBTHEME_KEY));
+					test(mainLayout, subThemeGrid.getSelectedRecord().getAttributeAsString(ClientConstants.SUBTHEME_KEY));
 				}
 			}
 		});
@@ -237,8 +233,7 @@ public class Language implements EntryPoint {
 		return mainLayout;
 	}
 
-	void codeCheck(final IButton addButton, final IButton addthemaButton,
-			final IButton addsubthemaButton) {
+	void codeCheck(final IButton addButton, final IButton addthemaButton, final IButton addsubthemaButton) {
 		final Window winModal = new Window();
 		winModal.setWidth(300);
 		winModal.setHeight(120);
@@ -304,30 +299,29 @@ public class Language implements EntryPoint {
 				label.setContents("");
 				cancelIButton.setDisabled(true);
 				okIButton.setDisabled(true);
-				languageService.codecheck(codeItem.getValueAsString(),
-						new AsyncCallback<String>() {
-							public void onFailure(Throwable caught) {
-								DisplayRequest.serverResponse();
-								label.setContents(ClientLabels.ERROR);
-								cancelIButton.setDisabled(false);
-								okIButton.setDisabled(false);
-							}
+				languageService.codecheck(codeItem.getValueAsString(), new AsyncCallback<String>() {
+					public void onFailure(Throwable caught) {
+						DisplayRequest.serverResponse();
+						label.setContents(ClientLabels.ERROR);
+						cancelIButton.setDisabled(false);
+						okIButton.setDisabled(false);
+					}
 
-							public void onSuccess(String result) {
-								DisplayRequest.serverResponse();
-								if (result.equals("TRUE")) {
-									add = true;
-									addButton.hide();
-									addthemaButton.show();
-									addsubthemaButton.show();
-									winModal.destroy();
-								} else {
-									label.setContents(ClientLabels.CODE_ERROR);
-									cancelIButton.setDisabled(false);
-									okIButton.setDisabled(false);
-								}
-							}
-						});
+					public void onSuccess(String result) {
+						DisplayRequest.serverResponse();
+						if (result.equals("TRUE")) {
+							add = true;
+							addButton.hide();
+							addthemaButton.show();
+							addsubthemaButton.show();
+							winModal.destroy();
+						} else {
+							label.setContents(ClientLabels.CODE_ERROR);
+							cancelIButton.setDisabled(false);
+							okIButton.setDisabled(false);
+						}
+					}
+				});
 			}
 		});
 
@@ -350,11 +344,11 @@ public class Language implements EntryPoint {
 		if ((mode == 1) || (mode == 2)) {
 			winModal.setWidth(500);
 			winModal.setHeight(120);
-		} 
+		}
 		if (mode == 3) {
 			winModal.setWidth(500);
 			winModal.setHeight(220);
-		}		
+		}
 		winModal.setTitle(ClientLabels.CODE);
 		winModal.setShowMinimizeButton(false);
 		winModal.setShowCloseButton(false);
@@ -410,8 +404,7 @@ public class Language implements EntryPoint {
 		okIButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				editForm.saveData(new DSCallback() {
-					public void execute(DSResponse response, Object rawData,
-							DSRequest request) {
+					public void execute(DSResponse response, Object rawData, DSRequest request) {
 						if (response.getStatus() == DSResponse.STATUS_SUCCESS)
 							winModal.destroy();
 					}
@@ -440,6 +433,7 @@ public class Language implements EntryPoint {
 		final ListGrid itemGrid = new ListGrid();
 		itemGrid.setWidth("90%");
 		itemGrid.setHeight("80%");
+		itemGrid.setBaseStyle("largerText");
 		itemGrid.setTitle(ClientLabels.ITEM);
 		itemGrid.setShowAllRecords(false);
 
@@ -451,10 +445,8 @@ public class Language implements EntryPoint {
 			}
 
 			@Override
-			protected void transformResponse(DSResponse response,
-					DSRequest request, Object data) {
-				if (response.getStatus() == RPCResponse.STATUS_FAILURE
-						|| response.getAttribute(ClientConstants.ERROR) != null) {
+			protected void transformResponse(DSResponse response, DSRequest request, Object data) {
+				if (response.getStatus() == RPCResponse.STATUS_FAILURE || response.getAttribute(ClientConstants.ERROR) != null) {
 					DisplayRequest.serverError();
 					if (response.getAttribute(ClientConstants.ERROR) != null)
 						SC.warn(response.getAttribute(ClientConstants.ERROR));
@@ -490,7 +482,7 @@ public class Language implements EntryPoint {
 
 		Label empty1Label = new Label("&nbsp;&nbsp");
 		buttonLayout.addMember(empty1Label);
-		
+
 		final IButton backButton = new IButton(ClientLabels.BUTTON_BACK);
 		buttonLayout.addMember(backButton);
 
@@ -525,6 +517,7 @@ public class Language implements EntryPoint {
 		final ListGrid itemGrid = new ListGrid();
 		itemGrid.setWidth("90%");
 		itemGrid.setHeight("20%");
+		itemGrid.setBaseStyle("largerText");
 		itemGrid.setTitle(ClientLabels.ITEM);
 		itemGrid.setShowAllRecords(false);
 
@@ -536,10 +529,8 @@ public class Language implements EntryPoint {
 			}
 
 			@Override
-			protected void transformResponse(DSResponse response,
-					DSRequest request, Object data) {
-				if (response.getStatus() == RPCResponse.STATUS_FAILURE
-						|| response.getAttribute(ClientConstants.ERROR) != null) {
+			protected void transformResponse(DSResponse response, DSRequest request, Object data) {
+				if (response.getStatus() == RPCResponse.STATUS_FAILURE || response.getAttribute(ClientConstants.ERROR) != null) {
 					DisplayRequest.serverError();
 					if (response.getAttribute(ClientConstants.ERROR) != null)
 						SC.warn(response.getAttribute(ClientConstants.ERROR));
@@ -560,8 +551,7 @@ public class Language implements EntryPoint {
 		buttonsLayout.setDefaultLayoutAlign(Alignment.CENTER);
 		buttonsLayout.setAlign(VerticalAlignment.CENTER);
 
-		final IButton translateButton = new IButton(
-				ClientLabels.BUTTON_TRANSLATE);
+		final IButton translateButton = new IButton(ClientLabels.BUTTON_TRANSLATE);
 		translateButton.setDisabled(true);
 		buttonsLayout.addMember(translateButton);
 
@@ -587,8 +577,7 @@ public class Language implements EntryPoint {
 		translateButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				for (int i = 0; i < itemGrid.getRecords().length; i++) {
-					itemGrid.getRecord(i).setAttribute(ClientConstants.ITEM_TO,
-							translate);
+					itemGrid.getRecord(i).setAttribute(ClientConstants.ITEM_TO, translate);
 				}
 				itemGrid.redraw();
 				translateButton.setDisabled(true);
@@ -616,10 +605,8 @@ public class Language implements EntryPoint {
 		itemGrid.addDataArrivedHandler(new DataArrivedHandler() {
 			public void onDataArrived(DataArrivedEvent event) {
 				for (int i = 0; i < itemGrid.getRecords().length; i++) {
-					translate = itemGrid.getRecord(i).getAttributeAsString(
-							ClientConstants.ITEM_TO);
-					itemGrid.getRecord(i).setAttribute(ClientConstants.ITEM_TO,
-							"");
+					translate = itemGrid.getRecord(i).getAttributeAsString(ClientConstants.ITEM_TO);
+					itemGrid.getRecord(i).setAttribute(ClientConstants.ITEM_TO, "");
 				}
 				translateButton.setDisabled(false);
 				testButton.setDisabled(false);

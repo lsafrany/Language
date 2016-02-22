@@ -19,7 +19,8 @@ import com.smartgwt.client.widgets.grid.ListGridRecord;
 public class SubThemeDataSource extends GwtRpcDataSource {
 
 	String theme_key = "";
-	
+
+	@SuppressWarnings("deprecation")
 	public SubThemeDataSource() {
 
 		TextItem textItem = new TextItem();
@@ -27,14 +28,12 @@ public class SubThemeDataSource extends GwtRpcDataSource {
 
 		DataSourceField field;
 
-		field = new DataSourceTextField(ClientConstants.SUBTHEME_KEY,
-				ClientLabels.SUBTHEME_KEY);
+		field = new DataSourceTextField(ClientConstants.SUBTHEME_KEY, ClientLabels.SUBTHEME_KEY);
 		field.setPrimaryKey(true);
 		field.setHidden(true);
 		addField(field);
 
-		field = new DataSourceTextField(ClientConstants.SUBTHEME_NAME,
-				ClientLabels.SUBTHEME_NAME);
+		field = new DataSourceTextField(ClientConstants.SUBTHEME_NAME, ClientLabels.SUBTHEME_NAME);
 		field.setRequired(true);
 		field.setEditorType(textItem);
 		addField(field);
@@ -42,71 +41,61 @@ public class SubThemeDataSource extends GwtRpcDataSource {
 	}
 
 	@Override
-	protected void executeFetch(final String requestId,
-			final DSRequest request, final DSResponse response) {
+	protected void executeFetch(final String requestId, final DSRequest request, final DSResponse response) {
 		theme_key = request.getCriteria().getAttribute(ClientConstants.THEME_KEY);
-		languageService.subthemes(
-				theme_key,
-				new AsyncCallback<List<SubThemeSer>>() {
-					public void onFailure(Throwable caught) {
-						response.setStatus(RPCResponse.STATUS_FAILURE);
-						processResponse(requestId, response);
-					}
+		languageService.subthemes(theme_key, new AsyncCallback<List<SubThemeSer>>() {
+			public void onFailure(Throwable caught) {
+				response.setStatus(RPCResponse.STATUS_FAILURE);
+				processResponse(requestId, response);
+			}
 
-					public void onSuccess(List<SubThemeSer> result) {
-						ListGridRecord[] list = new ListGridRecord[result
-								.size()];
-						if ((result.size() > 0)
-								&& (result.get(0).getError() != null))
-							response.setAttribute(ClientConstants.ERROR, result
-									.get(0).getError());
-						for (int i = 0; i < list.length; i++) {
-							ListGridRecord record = new ListGridRecord();
-							copyValues(result.get(i), record);
-							list[i] = record;
-						}
-						response.setData(list);
-						processResponse(requestId, response);
-					}
-				});
+			public void onSuccess(List<SubThemeSer> result) {
+				ListGridRecord[] list = new ListGridRecord[result.size()];
+				if ((result.size() > 0) && (result.get(0).getError() != null))
+					response.setAttribute(ClientConstants.ERROR, result.get(0).getError());
+				for (int i = 0; i < list.length; i++) {
+					ListGridRecord record = new ListGridRecord();
+					copyValues(result.get(i), record);
+					list[i] = record;
+				}
+				response.setData(list);
+				processResponse(requestId, response);
+			}
+		});
 	}
 
 	@Override
-	protected void executeAdd(final String requestId, final DSRequest request,
-			final DSResponse response) {
+	protected void executeAdd(final String requestId, final DSRequest request, final DSResponse response) {
 
 		JavaScriptObject data = request.getData();
 		ListGridRecord rec = new ListGridRecord(data);
 		SubThemeSer subThemeSer = new SubThemeSer();
 		copyValues(rec, subThemeSer);
-		languageService.addSubTheme(theme_key, subThemeSer,
-				new AsyncCallback<SubThemeSer>() {
-					public void onFailure(Throwable caught) {
-						response.setStatus(DSResponse.STATUS_FAILURE);
-						processResponse(requestId, response);
-					}
+		languageService.addSubTheme(theme_key, subThemeSer, new AsyncCallback<SubThemeSer>() {
+			public void onFailure(Throwable caught) {
+				response.setStatus(DSResponse.STATUS_FAILURE);
+				processResponse(requestId, response);
+			}
 
-					public void onSuccess(SubThemeSer result) {
-						ListGridRecord[] list = new ListGridRecord[1];
-						ListGridRecord newRec = new ListGridRecord();
-						copyValues(result, newRec);
-						list[0] = newRec;
-						response.setData(list);
-						processResponse(requestId, response);
-					}
-				});
-
-	}
-
-	@Override
-	protected void executeUpdate(final String requestId,
-			final DSRequest request, final DSResponse response) {
+			public void onSuccess(SubThemeSer result) {
+				ListGridRecord[] list = new ListGridRecord[1];
+				ListGridRecord newRec = new ListGridRecord();
+				copyValues(result, newRec);
+				list[0] = newRec;
+				response.setData(list);
+				processResponse(requestId, response);
+			}
+		});
 
 	}
 
 	@Override
-	protected void executeRemove(final String requestId,
-			final DSRequest request, final DSResponse response) {
+	protected void executeUpdate(final String requestId, final DSRequest request, final DSResponse response) {
+
+	}
+
+	@Override
+	protected void executeRemove(final String requestId, final DSRequest request, final DSResponse response) {
 
 	}
 

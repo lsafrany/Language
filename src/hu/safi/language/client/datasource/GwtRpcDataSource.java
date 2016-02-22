@@ -47,8 +47,7 @@ import com.smartgwt.client.types.DSProtocol;
 
 public abstract class GwtRpcDataSource extends DataSource {
 
-	protected final LanguageServiceAsync languageService = GWT
-			.create(LanguageService.class);
+	protected final LanguageServiceAsync languageService = GWT.create(LanguageService.class);
 
 	/**
 	 * Creates new data source which communicates with server by GWT RPC. It is
@@ -74,8 +73,7 @@ public abstract class GwtRpcDataSource extends DataSource {
 	protected Object transformRequest(DSRequest request) {
 		String requestId = request.getRequestId();
 		DSResponse response = new DSResponse();
-		response.setAttribute("clientContext",
-				request.getAttributeAsObject("clientContext"));
+		response.setAttribute("clientContext", request.getAttributeAsObject("clientContext"));
 		// Asume success
 		response.setStatus(0);
 		switch (request.getOperationType()) {
@@ -113,8 +111,7 @@ public abstract class GwtRpcDataSource extends DataSource {
 	 *            called on successful execution of this method.
 	 *            <code>setStatus (&lt;0)</code> should be called on failure.
 	 */
-	protected abstract void executeFetch(String requestId, DSRequest request,
-			DSResponse response);
+	protected abstract void executeFetch(String requestId, DSRequest request, DSResponse response);
 
 	/**
 	 * Executed on <code>ADD</code> operation.
@@ -134,8 +131,7 @@ public abstract class GwtRpcDataSource extends DataSource {
 	 *            contain single element representing added row.
 	 *            <code>setStatus (&lt;0)</code> should be called on failure.
 	 */
-	protected abstract void executeAdd(String requestId, DSRequest request,
-			DSResponse response);
+	protected abstract void executeAdd(String requestId, DSRequest request, DSResponse response);
 
 	/**
 	 * Executed on <code>UPDATE</code> operation.
@@ -155,8 +151,7 @@ public abstract class GwtRpcDataSource extends DataSource {
 	 *            contain single element representing updated row.
 	 *            <code>setStatus (&lt;0)</code> should be called on failure.
 	 */
-	protected abstract void executeUpdate(String requestId, DSRequest request,
-			DSResponse response);
+	protected abstract void executeUpdate(String requestId, DSRequest request, DSResponse response);
 
 	/**
 	 * Executed on <code>REMOVE</code> operation.
@@ -176,7 +171,6 @@ public abstract class GwtRpcDataSource extends DataSource {
 	 *            contain single element representing removed row.
 	 *            <code>setStatus (&lt;0)</code> should be called on failure.
 	 */
-	protected abstract void executeRemove(String requestId, DSRequest request,
-			DSResponse response);
+	protected abstract void executeRemove(String requestId, DSRequest request, DSResponse response);
 
 }
