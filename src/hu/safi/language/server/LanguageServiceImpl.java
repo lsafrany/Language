@@ -95,6 +95,7 @@ public class LanguageServiceImpl extends RemoteServiceServlet implements Languag
 					SubThemeSer subThemeSer = new SubThemeSer();
 					subThemeSer.setKey(s.getKey().toString());
 					subThemeSer.setName(s.getName());
+					subThemeSer.setLang(s.getLang());
 					subThemes.add(subThemeSer);
 				}
 			}
@@ -115,7 +116,7 @@ public class LanguageServiceImpl extends RemoteServiceServlet implements Languag
 		try {
 
 			Theme theme = pm.getObjectById(Theme.class, KeyToID(themeID));
-			SubTheme subTheme = new SubTheme(theme.getKey(), subThemeSer.getName());
+			SubTheme subTheme = new SubTheme(theme.getKey(), subThemeSer.getName(),subThemeSer.getLang());
 			pm.makePersistent(subTheme);
 			subThemeSer.setKey(subTheme.getKey().toString());
 			pm.flush();

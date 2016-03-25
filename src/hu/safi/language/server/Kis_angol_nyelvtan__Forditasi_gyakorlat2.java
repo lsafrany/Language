@@ -19,6 +19,7 @@ public class Kis_angol_nyelvtan__Forditasi_gyakorlat2 {
 		if (!subThemeList.isEmpty()) {
 			for (SubTheme s : subThemeList) {
 				if (s.getName().equals("Fordítási gyakorlat")) {
+					
 					Item item1200 = new Item(s.getKey(), "vár", "expect");
 					Item item1201 = new Item(s.getKey(), "nem sikerül", "fail");
 					Item item1202 = new Item(s.getKey(), "remél", "hope");

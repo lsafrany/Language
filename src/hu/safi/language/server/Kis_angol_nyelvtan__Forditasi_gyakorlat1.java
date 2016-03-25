@@ -19,6 +19,7 @@ public class Kis_angol_nyelvtan__Forditasi_gyakorlat1 {
 		if (!subThemeList.isEmpty()) {
 			for (SubTheme s : subThemeList) {
 				if (s.getName().equals("Fordítási gyakorlat")) {
+					
 					Item item1 = new Item(s.getKey(), "Mióta vársz magasabb életszínvonalra?",
 							"How long have you been waiting for a higher standard of living?");
 					Item item2 = new Item(s.getKey(), "Mióta próbálja visszaszerezni?",

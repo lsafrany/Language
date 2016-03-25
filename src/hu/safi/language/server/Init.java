@@ -8,6 +8,7 @@ import hu.safi.language.server.jdo.Load;
 import hu.safi.language.server.jdo.PMF;
 import hu.safi.language.server.jdo.SubTheme;
 import hu.safi.language.server.jdo.Theme;
+import hu.safi.language.shared.Constants;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -79,11 +80,11 @@ public class Init extends HttpServlet {
 				if (!themeList.isEmpty()) {
 					for (Theme t : themeList) {
 						if (t.getName().equals("Kis angol nyelvtan")) {
-							SubTheme subTheme1 = new SubTheme(t.getKey(), "Fordítási gyakorlat");
+							SubTheme subTheme1 = new SubTheme(t.getKey(), "Fordítási gyakorlat", Constants.EN);
 							pm.makePersistent(subTheme1);
 						}
 						if (t.getName().equals("Angol szavak és kifejezések")) {
-							SubTheme subTheme1 = new SubTheme(t.getKey(), "Első rész");
+							SubTheme subTheme1 = new SubTheme(t.getKey(), "Első rész", Constants.EN);
 							pm.makePersistent(subTheme1);
 						}
 					}
@@ -100,6 +101,10 @@ public class Init extends HttpServlet {
 				Angol_szavak_es_kifejezesek__Elso_resz1 angol_szavak_es_kifejezesek__Elso_resz1 = new Angol_szavak_es_kifejezesek__Elso_resz1(
 						pm);
 				Angol_szavak_es_kifejezesek__Elso_resz2 angol_szavak_es_kifejezesek__Elso_resz2 = new Angol_szavak_es_kifejezesek__Elso_resz2(
+						pm);
+				Angol_szavak_es_kifejezesek__Elso_resz3 angol_szavak_es_kifejezesek__Elso_resz3 = new Angol_szavak_es_kifejezesek__Elso_resz3(
+						pm);
+				Angol_szavak_es_kifejezesek__Elso_resz4 angol_szavak_es_kifejezesek__Elso_resz4 = new Angol_szavak_es_kifejezesek__Elso_resz4(
 						pm);
 
 				Query resultSubThemes = pm.newQuery("select from " + SubTheme.class.getName());

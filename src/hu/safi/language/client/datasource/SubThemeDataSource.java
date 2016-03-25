@@ -2,8 +2,10 @@ package hu.safi.language.client.datasource;
 
 import hu.safi.language.client.ClientConstants;
 import hu.safi.language.client.ClientLabels;
+import hu.safi.language.shared.Constants;
 import hu.safi.language.shared.serialized.SubThemeSer;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import com.google.gwt.core.client.JavaScriptObject;
@@ -26,6 +28,9 @@ public class SubThemeDataSource extends GwtRpcDataSource {
 		TextItem textItem = new TextItem();
 		textItem.setWidth("350");
 
+        LinkedHashMap<String, String> langHashMap = new LinkedHashMap<String, String>();
+        langHashMap.put(Constants.EN, ClientLabels.SUBTHEME_LANG_EN);
+
 		DataSourceField field;
 
 		field = new DataSourceTextField(ClientConstants.SUBTHEME_KEY, ClientLabels.SUBTHEME_KEY);
@@ -36,6 +41,11 @@ public class SubThemeDataSource extends GwtRpcDataSource {
 		field = new DataSourceTextField(ClientConstants.SUBTHEME_NAME, ClientLabels.SUBTHEME_NAME);
 		field.setRequired(true);
 		field.setEditorType(textItem);
+		addField(field);
+
+		field = new DataSourceTextField(ClientConstants.SUBTHEME_LANG, ClientLabels.SUBTHEME_LANG);
+		field.setRequired(true);
+        field.setValueMap(langHashMap);
 		addField(field);
 
 	}
@@ -102,12 +112,14 @@ public class SubThemeDataSource extends GwtRpcDataSource {
 	private static void copyValues(SubThemeSer from, ListGridRecord to) {
 		to.setAttribute(ClientConstants.SUBTHEME_KEY, from.getKey());
 		to.setAttribute(ClientConstants.SUBTHEME_NAME, from.getName());
+		to.setAttribute(ClientConstants.SUBTHEME_LANG, from.getLang());
 	}
 
 	private static void copyValues(ListGridRecord from, SubThemeSer to) {
 
 		to.setKey(from.getAttributeAsString(ClientConstants.SUBTHEME_KEY));
 		to.setName(from.getAttributeAsString(ClientConstants.SUBTHEME_NAME));
+		to.setLang(from.getAttributeAsString(ClientConstants.SUBTHEME_LANG));
 	}
 
 }

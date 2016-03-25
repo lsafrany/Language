@@ -26,6 +26,7 @@ import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.PasswordItem;
 import com.smartgwt.client.widgets.grid.ListGrid;
+import com.smartgwt.client.widgets.grid.ListGridField;
 import com.smartgwt.client.widgets.grid.events.DataArrivedEvent;
 import com.smartgwt.client.widgets.grid.events.DataArrivedHandler;
 import com.smartgwt.client.widgets.grid.events.RecordClickEvent;
@@ -101,6 +102,14 @@ public class Language implements EntryPoint {
 		subThemeGrid.setTitle(ClientLabels.SUBTHEME);
 		subThemeGrid.setShowAllRecords(true);
 
+		ListGridField nameGridField = new ListGridField(
+				ClientConstants.SUBTHEME_NAME);
+		ListGridField langGridField = new ListGridField(
+				ClientConstants.SUBTHEME_LANG);
+		langGridField.setWidth("30%");
+
+		subThemeGrid.setFields(nameGridField,langGridField);
+		
 		final DataSource subThemeDataSource = new SubThemeDataSource() {
 			@Override
 			protected Object transformRequest(DSRequest dsRequest) {
@@ -341,11 +350,15 @@ public class Language implements EntryPoint {
 
 	void additem(final int mode, final DataSource dataSource) {
 		final Window winModal = new Window();
-		if ((mode == 1) || (mode == 2)) {
+		if (mode == 1) {
 			winModal.setWidth(500);
 			winModal.setHeight(120);
 		}
-		if (mode == 3) {
+		else if (mode == 2) {
+			winModal.setWidth(500);
+			winModal.setHeight(200);
+		}
+		else if (mode == 3) {
 			winModal.setWidth(500);
 			winModal.setHeight(220);
 		}

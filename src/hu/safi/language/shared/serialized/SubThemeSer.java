@@ -8,6 +8,8 @@ public class SubThemeSer extends ResultSer implements IsSerializable {
 
 	private String name;
 
+	private String lang;
+
 	public String getKey() {
 		return key;
 	}
@@ -24,4 +26,13 @@ public class SubThemeSer extends ResultSer implements IsSerializable {
 		this.name = name;
 	}
 
+	public String getLang() {
+		return lang;
+	}
+
+	public void setLang(String lang) {
+		this.lang = lang;
+	}
+
 }
+

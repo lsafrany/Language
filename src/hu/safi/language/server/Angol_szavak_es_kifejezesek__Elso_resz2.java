@@ -93,8 +93,8 @@ public class Angol_szavak_es_kifejezesek__Elso_resz2 {
 					Item item71 = new Item(s.getKey(), "csavar", "a screw");
 					Item item72 = new Item(s.getKey(), "kinálni, ajánlani", "to offer");
 					Item item73 = new Item(s.getKey(), "összecsavart, tekercselt", "rolled");
-					Item item74 = new Item(s.getKey(), "sort", "fajta");
-					Item item75 = new Item(s.getKey(), "goods", "árucikkek, javak");
+					Item item74 = new Item(s.getKey(), "falta", "sort");
+					Item item75 = new Item(s.getKey(), "árucikkek, javak", "goods");
 					Item item76 = new Item(s.getKey(), "piszmog", "to potter");
 					Item item77 = new Item(s.getKey(), "szilárd, biztos", "steady");
 					Item item78 = new Item(s.getKey(), "tervezni, szándékozni", "to think of");
@@ -114,8 +114,8 @@ public class Angol_szavak_es_kifejezesek__Elso_resz2 {
 					Item item92 = new Item(s.getKey(), "hivatalos", "formal");
 					Item item93 = new Item(s.getKey(), "szerény, igénytelen", "modest");
 					Item item94 = new Item(s.getKey(), "elégedetnek lenni", "to be contented");
-					Item item95 = new Item(s.getKey(), "fair complexion", "világos bőr");				
-					Item item96 = new Item(s.getKey(), "thick hair", "sűrű haj");
+					Item item95 = new Item(s.getKey(), "világos bőr", "fair complexion");				
+					Item item96 = new Item(s.getKey(), "sűrű haj", "thick hair");
 					Item item97 = new Item(s.getKey(), "eléggé", "rather");
 					Item item98 = new Item(s.getKey(), "lófarok", "pony-tail");
 					Item item99 = new Item(s.getKey(), "konty", "bun");

@@ -20,9 +20,13 @@ public class SubTheme {
 	@Persistent
 	private String name;
 
-	public SubTheme(Key theme, String name) {
+	@Persistent
+	private String lang;
+
+	public SubTheme(Key theme, String name, String lang) {
 		this.theme = theme;
 		this.name = name;
+		this.lang = lang;
 	}
 
 	public Key getKey() {
@@ -43,6 +47,14 @@ public class SubTheme {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getLang() {
+		return lang;
+	}
+
+	public void setLang(String lang) {
+		this.lang = lang;
 	}
 
 }

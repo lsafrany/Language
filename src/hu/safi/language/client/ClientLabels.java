@@ -9,7 +9,10 @@ public class ClientLabels {
 	public static final String SUBTHEME = "Altémák";
 	public static final String SUBTHEME_KEY = "Kulcs";
 	public static final String SUBTHEME_NAME = "Altéma";
-
+	public static final String SUBTHEME_LANG = "Nyelv";
+	
+	public static final String SUBTHEME_LANG_EN = "Angol";
+	
 	public static final String BUTTON_LIST = "Lista";
 	public static final String BUTTON_TEST = "Teszt";
 	public static final String BUTTON_BACK = "Vissza";
