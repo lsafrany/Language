@@ -3,6 +3,7 @@ package hu.safi.language.client;
 import hu.safi.language.client.datasource.ItemDataSource;
 import hu.safi.language.client.datasource.SubThemeDataSource;
 import hu.safi.language.client.datasource.ThemeDataSource;
+import hu.safi.language.shared.Constants;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -226,7 +227,8 @@ public class Language implements EntryPoint {
 		listButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				if (subThemeGrid.getSelectedRecord() != null) {
-					list(mainLayout, subThemeGrid.getSelectedRecord().getAttributeAsString(ClientConstants.SUBTHEME_KEY));
+					list(mainLayout, subThemeGrid.getSelectedRecord().getAttributeAsString(ClientConstants.SUBTHEME_KEY),
+							subThemeGrid.getSelectedRecord().getAttributeAsString(ClientConstants.SUBTHEME_LANG));
 				}
 			}
 		});
@@ -234,7 +236,8 @@ public class Language implements EntryPoint {
 		testButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				if (subThemeGrid.getSelectedRecord() != null) {
-					test(mainLayout, subThemeGrid.getSelectedRecord().getAttributeAsString(ClientConstants.SUBTHEME_KEY));
+					test(mainLayout, subThemeGrid.getSelectedRecord().getAttributeAsString(ClientConstants.SUBTHEME_KEY),
+							subThemeGrid.getSelectedRecord().getAttributeAsString(ClientConstants.SUBTHEME_LANG));
 				}
 			}
 		});
@@ -439,7 +442,7 @@ public class Language implements EntryPoint {
 
 	}
 
-	void list(final HLayout mainLayout, String subTheme) {
+	void list(final HLayout mainLayout, final String subTheme, final String lang) {
 
 		mainLayout.removeMembers(mainLayout.getMembers());
 
@@ -521,9 +524,17 @@ public class Language implements EntryPoint {
 			}
 		});
 
-	}
+		itemGrid.addRecordClickHandler(new RecordClickHandler() {
+			public void onRecordClick(RecordClickEvent event) {
+				if (lang.equals(Constants.EN)) {
+					speach_en_female(event.getRecord().getAttributeAsString(ClientConstants.ITEM_TO));
+				}
+			}
+		});
 
-	void test(final HLayout mainLayout, final String subTheme) {
+	}
+	
+	void test(final HLayout mainLayout, final String subTheme, final String lang) {
 
 		mainLayout.removeMembers(mainLayout.getMembers());
 
@@ -594,6 +605,9 @@ public class Language implements EntryPoint {
 				}
 				itemGrid.redraw();
 				translateButton.setDisabled(true);
+				if (lang.equals(Constants.EN)) {
+					speach_en_female(translate);
+				}
 			}
 		});
 
@@ -627,5 +641,9 @@ public class Language implements EntryPoint {
 		});
 
 	}
+
+	public static native void speach_en_female(String speachto) /*-{
+		$wnd.responsiveVoice.speak(speachto,"UK English Female");
+	}-*/;
 
 }
