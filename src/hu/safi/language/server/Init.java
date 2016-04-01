@@ -3,6 +3,14 @@
 
 package hu.safi.language.server;
 
+import hu.safi.language.server.data.Angol_szavak_es_kifejezesek_1;
+import hu.safi.language.server.data.Angol_szavak_es_kifejezesek_2;
+import hu.safi.language.server.data.Angol_szavak_es_kifejezesek_3;
+import hu.safi.language.server.data.Angol_szavak_es_kifejezesek_4;
+import hu.safi.language.server.data.Kis_angol_nyelvtan_1;
+import hu.safi.language.server.data.Kis_angol_nyelvtan_2;
+import hu.safi.language.server.data.Kis_angol_nyelvtan_3;
+import hu.safi.language.server.data.Kis_angol_nyelvtan_4;
 import hu.safi.language.server.jdo.Item;
 import hu.safi.language.server.jdo.Load;
 import hu.safi.language.server.jdo.PMF;
@@ -44,11 +52,11 @@ public class Init extends HttpServlet {
 		try {
 
 			Boolean needLoad = false;
-			/*
-			 * Query loads = pm.newQuery(Load.class);
-			 * loads.deletePersistentAll(); Load load = new Load(true);
-			 * pm.makePersistent(load);
-			 */
+/*			
+			Query loads = pm.newQuery(Load.class);
+			loads.deletePersistentAll(); Load load = new Load(true);
+			pm.makePersistent(load);
+*/			 
 			Query queryLoad = pm.newQuery("select from " + Load.class.getName());
 			@SuppressWarnings("unchecked")
 			List<Load> loadList = (List<Load>) pm.newQuery(queryLoad).execute();
@@ -65,10 +73,10 @@ public class Init extends HttpServlet {
 				Query themes = pm.newQuery(Theme.class);
 				themes.deletePersistentAll();
 
-				Theme theme1 = new Theme("Kis angol nyelvtan");
+				Theme theme1 = new Theme(ServerConstants.THEME1,"1");
 				pm.makePersistent(theme1);
 
-				Theme theme2 = new Theme("Angol szavak és kifejezések");
+				Theme theme2 = new Theme(ServerConstants.THEME2,"2");
 				pm.makePersistent(theme2);
 
 				Query subThemes = pm.newQuery(SubTheme.class);
@@ -79,13 +87,25 @@ public class Init extends HttpServlet {
 				List<Theme> themeList = (List<Theme>) pm.newQuery(queryTheme).execute();
 				if (!themeList.isEmpty()) {
 					for (Theme t : themeList) {
-						if (t.getName().equals("Kis angol nyelvtan")) {
-							SubTheme subTheme1 = new SubTheme(t.getKey(), "Fordítási gyakorlat", Constants.EN);
+						if (t.getName().equals(ServerConstants.THEME1)) {
+							SubTheme subTheme1 = new SubTheme(t.getKey(), ServerConstants.THEME1_SUBTHEME1, Constants.EN, "1");
 							pm.makePersistent(subTheme1);
+							SubTheme subTheme2 = new SubTheme(t.getKey(), ServerConstants.THEME1_SUBTHEME2, Constants.EN, "2");
+							pm.makePersistent(subTheme2);
+							SubTheme subTheme3 = new SubTheme(t.getKey(), ServerConstants.THEME1_SUBTHEME3, Constants.EN, "3");
+							pm.makePersistent(subTheme3);
+							SubTheme subTheme4 = new SubTheme(t.getKey(), ServerConstants.THEME1_SUBTHEME4, Constants.EN, "4");
+							pm.makePersistent(subTheme4);
 						}
-						if (t.getName().equals("Angol szavak és kifejezések")) {
-							SubTheme subTheme1 = new SubTheme(t.getKey(), "Első rész", Constants.EN);
+						if (t.getName().equals(ServerConstants.THEME2)) {
+							SubTheme subTheme1 = new SubTheme(t.getKey(), ServerConstants.THEME2_SUBTHEME1, Constants.EN, "1");
 							pm.makePersistent(subTheme1);
+							SubTheme subTheme2 = new SubTheme(t.getKey(), ServerConstants.THEME2_SUBTHEME2, Constants.EN, "2");
+							pm.makePersistent(subTheme2);
+							SubTheme subTheme3 = new SubTheme(t.getKey(), ServerConstants.THEME2_SUBTHEME3, Constants.EN, "3");
+							pm.makePersistent(subTheme3);
+							SubTheme subTheme4 = new SubTheme(t.getKey(), ServerConstants.THEME2_SUBTHEME4, Constants.EN, "4");
+							pm.makePersistent(subTheme4);
 						}
 					}
 				}
@@ -93,19 +113,15 @@ public class Init extends HttpServlet {
 				Query items = pm.newQuery(Item.class);
 				items.deletePersistentAll();
 
-				Kis_angol_nyelvtan__Forditasi_gyakorlat1 kis_angol_nyelvtan__Forditasi_gyakorlat1 = new Kis_angol_nyelvtan__Forditasi_gyakorlat1(
-						pm);
-				Kis_angol_nyelvtan__Forditasi_gyakorlat2 kis_angol_nyelvtan__Forditasi_gyakorlat2 = new Kis_angol_nyelvtan__Forditasi_gyakorlat2(
-						pm);
+				Angol_szavak_es_kifejezesek_1 angol_szavak_es_kifejezesek_1 = new Angol_szavak_es_kifejezesek_1(pm);
+				Angol_szavak_es_kifejezesek_2 angol_szavak_es_kifejezesek_2 = new Angol_szavak_es_kifejezesek_2(pm);
+				Angol_szavak_es_kifejezesek_3 angol_szavak_es_kifejezesek_3 = new Angol_szavak_es_kifejezesek_3(pm);
+				Angol_szavak_es_kifejezesek_4 angol_szavak_es_kifejezesek_4 = new Angol_szavak_es_kifejezesek_4(pm);
 
-				Angol_szavak_es_kifejezesek__Elso_resz1 angol_szavak_es_kifejezesek__Elso_resz1 = new Angol_szavak_es_kifejezesek__Elso_resz1(
-						pm);
-				Angol_szavak_es_kifejezesek__Elso_resz2 angol_szavak_es_kifejezesek__Elso_resz2 = new Angol_szavak_es_kifejezesek__Elso_resz2(
-						pm);
-				Angol_szavak_es_kifejezesek__Elso_resz3 angol_szavak_es_kifejezesek__Elso_resz3 = new Angol_szavak_es_kifejezesek__Elso_resz3(
-						pm);
-				Angol_szavak_es_kifejezesek__Elso_resz4 angol_szavak_es_kifejezesek__Elso_resz4 = new Angol_szavak_es_kifejezesek__Elso_resz4(
-						pm);
+				Kis_angol_nyelvtan_1 kis_angol_nyelvtan_1 = new Kis_angol_nyelvtan_1(pm);
+				Kis_angol_nyelvtan_2 kis_angol_nyelvtan_2 = new Kis_angol_nyelvtan_2(pm);
+				Kis_angol_nyelvtan_3 kis_angol_nyelvtan_3 = new Kis_angol_nyelvtan_3(pm);
+				Kis_angol_nyelvtan_4 kis_angol_nyelvtan_4 = new Kis_angol_nyelvtan_4(pm);
 
 				Query resultSubThemes = pm.newQuery("select from " + SubTheme.class.getName());
 				@SuppressWarnings("unchecked")

@@ -46,6 +46,7 @@ public class LanguageServiceImpl extends RemoteServiceServlet implements Languag
 					ThemeSer themeSer = new ThemeSer();
 					themeSer.setKey(t.getKey().toString());
 					themeSer.setName(t.getName());
+					themeSer.setOrder(t.getOrder());
 					themes.add(themeSer);
 				}
 			}
@@ -64,8 +65,15 @@ public class LanguageServiceImpl extends RemoteServiceServlet implements Languag
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		try {
-
-			Theme theme = new Theme(themeSer.getName());
+			Query query = pm.newQuery("select from " + Theme.class.getName());
+			@SuppressWarnings("unchecked")
+			List<SubTheme> list = (List<SubTheme>) pm.newQuery(query).execute();
+			Integer count = 0;
+			if (!list.isEmpty()) {
+				count = list.size();
+			}
+			count++;
+			Theme theme = new Theme(themeSer.getName(),count.toString());
 			pm.makePersistent(theme);
 			themeSer.setKey(theme.getKey().toString());
 			pm.flush();
@@ -96,6 +104,7 @@ public class LanguageServiceImpl extends RemoteServiceServlet implements Languag
 					subThemeSer.setKey(s.getKey().toString());
 					subThemeSer.setName(s.getName());
 					subThemeSer.setLang(s.getLang());
+					subThemeSer.setOrder(s.getOrder());
 					subThemes.add(subThemeSer);
 				}
 			}
@@ -115,8 +124,16 @@ public class LanguageServiceImpl extends RemoteServiceServlet implements Languag
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		try {
 
+			Query query = pm.newQuery("select from " + SubTheme.class.getName());
+			@SuppressWarnings("unchecked")
+			List<SubTheme> list = (List<SubTheme>) pm.newQuery(query).execute();
+			Integer count = 0;
+			if (!list.isEmpty()) {
+				count = list.size();
+			}
+			count++;
 			Theme theme = pm.getObjectById(Theme.class, KeyToID(themeID));
-			SubTheme subTheme = new SubTheme(theme.getKey(), subThemeSer.getName(),subThemeSer.getLang());
+			SubTheme subTheme = new SubTheme(theme.getKey(), subThemeSer.getName(),subThemeSer.getLang(),count.toString());
 			pm.makePersistent(subTheme);
 			subThemeSer.setKey(subTheme.getKey().toString());
 			pm.flush();

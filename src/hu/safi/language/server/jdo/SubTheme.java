@@ -23,10 +23,14 @@ public class SubTheme {
 	@Persistent
 	private String lang;
 
-	public SubTheme(Key theme, String name, String lang) {
+	@Persistent
+	private String order;
+
+	public SubTheme(Key theme, String name, String lang, String order) {
 		this.theme = theme;
 		this.name = name;
 		this.lang = lang;
+		this.order = order;
 	}
 
 	public Key getKey() {
@@ -55,6 +59,14 @@ public class SubTheme {
 
 	public void setLang(String lang) {
 		this.lang = lang;
+	}
+
+	public String getOrder() {
+		return order;
+	}
+
+	public void setOrder(String order) {
+		this.order = order;
 	}
 
 }

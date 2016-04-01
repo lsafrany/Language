@@ -8,6 +8,8 @@ public class ThemeSer extends ResultSer implements IsSerializable {
 
 	private String name;
 
+	private String order;
+	
 	public String getKey() {
 		return key;
 	}
@@ -22,6 +24,14 @@ public class ThemeSer extends ResultSer implements IsSerializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getOrder() {
+		return order;
+	}
+
+	public void setOrder(String order) {
+		this.order = order;
 	}
 
 }

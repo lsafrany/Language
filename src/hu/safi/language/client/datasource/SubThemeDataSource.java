@@ -48,6 +48,10 @@ public class SubThemeDataSource extends GwtRpcDataSource {
         field.setValueMap(langHashMap);
 		addField(field);
 
+		field = new DataSourceTextField(ClientConstants.SUBTHEME_ORDER, ClientLabels.SUBTHEME_ORDER);
+		field.setHidden(true);
+		addField(field);
+
 	}
 
 	@Override
@@ -113,6 +117,7 @@ public class SubThemeDataSource extends GwtRpcDataSource {
 		to.setAttribute(ClientConstants.SUBTHEME_KEY, from.getKey());
 		to.setAttribute(ClientConstants.SUBTHEME_NAME, from.getName());
 		to.setAttribute(ClientConstants.SUBTHEME_LANG, from.getLang());
+		to.setAttribute(ClientConstants.SUBTHEME_ORDER, from.getOrder());
 	}
 
 	private static void copyValues(ListGridRecord from, SubThemeSer to) {
@@ -120,6 +125,7 @@ public class SubThemeDataSource extends GwtRpcDataSource {
 		to.setKey(from.getAttributeAsString(ClientConstants.SUBTHEME_KEY));
 		to.setName(from.getAttributeAsString(ClientConstants.SUBTHEME_NAME));
 		to.setLang(from.getAttributeAsString(ClientConstants.SUBTHEME_LANG));
+		to.setOrder(from.getAttributeAsString(ClientConstants.SUBTHEME_ORDER));
 	}
 
 }

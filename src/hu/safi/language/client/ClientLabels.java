@@ -5,11 +5,13 @@ public class ClientLabels {
 	public static final String THEME = "Témák";
 	public static final String THEME_KEY = "Kulcs";
 	public static final String THEME_NAME = "Téma";
+	public static final String THEME_ORDER = "Sorrend";
 
 	public static final String SUBTHEME = "Altémák";
 	public static final String SUBTHEME_KEY = "Kulcs";
 	public static final String SUBTHEME_NAME = "Altéma";
 	public static final String SUBTHEME_LANG = "Nyelv";
+	public static final String SUBTHEME_ORDER = "Sorrend";
 	
 	public static final String SUBTHEME_LANG_EN = "Angol";
 	

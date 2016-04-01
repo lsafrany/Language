@@ -71,8 +71,9 @@ public class Language implements EntryPoint {
 		themeGrid.setHeight("80%");
 		themeGrid.setBaseStyle("largerText");
 		themeGrid.setTitle(ClientLabels.THEME);
+		themeGrid.setSortField(ClientConstants.THEME_ORDER);
 		themeGrid.setShowAllRecords(true);
-
+		
 		final DataSource themeDataSource = new ThemeDataSource() {
 			@Override
 			protected Object transformRequest(DSRequest dsRequest) {
@@ -101,8 +102,9 @@ public class Language implements EntryPoint {
 		subThemeGrid.setHeight("80%");
 		subThemeGrid.setBaseStyle("largerText");
 		subThemeGrid.setTitle(ClientLabels.SUBTHEME);
+		subThemeGrid.setSortField(ClientConstants.SUBTHEME_ORDER);
 		subThemeGrid.setShowAllRecords(true);
-
+		
 		ListGridField nameGridField = new ListGridField(
 				ClientConstants.SUBTHEME_NAME);
 		ListGridField langGridField = new ListGridField(

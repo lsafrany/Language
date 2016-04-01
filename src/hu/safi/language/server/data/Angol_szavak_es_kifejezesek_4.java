@@ -1,5 +1,6 @@
-package hu.safi.language.server;
+package hu.safi.language.server.data;
 
+import hu.safi.language.server.ServerConstants;
 import hu.safi.language.server.jdo.Item;
 import hu.safi.language.server.jdo.SubTheme;
 
@@ -8,9 +9,9 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-public class Angol_szavak_es_kifejezesek__Elso_resz4 {
+public class Angol_szavak_es_kifejezesek_4 {
 
-	public Angol_szavak_es_kifejezesek__Elso_resz4(PersistenceManager pm) {
+	public Angol_szavak_es_kifejezesek_4(PersistenceManager pm) {
 		super();
 
 		Query querySubTheme = pm.newQuery("select from " + SubTheme.class.getName());
@@ -18,7 +19,7 @@ public class Angol_szavak_es_kifejezesek__Elso_resz4 {
 		List<SubTheme> subThemeList = (List<SubTheme>) pm.newQuery(querySubTheme).execute();
 		if (!subThemeList.isEmpty()) {
 			for (SubTheme s : subThemeList) {
-				if (s.getName().equals("Első rész")) {
+				if (s.getName().equals(ServerConstants.THEME1_SUBTHEME4)) {
 
 					Item item1 = new Item(s.getKey(), ".", "full stop, dot");
 					Item item2 = new Item(s.getKey(), "?", "question mark");

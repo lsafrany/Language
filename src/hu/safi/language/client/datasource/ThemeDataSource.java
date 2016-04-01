@@ -36,6 +36,10 @@ public class ThemeDataSource extends GwtRpcDataSource {
 		field.setEditorType(textItem);
 		addField(field);
 
+		field = new DataSourceTextField(ClientConstants.THEME_ORDER, ClientLabels.THEME_ORDER);		
+		field.setHidden(true);
+		addField(field);
+
 	}
 
 	@Override
@@ -99,12 +103,14 @@ public class ThemeDataSource extends GwtRpcDataSource {
 	private static void copyValues(ThemeSer from, ListGridRecord to) {
 		to.setAttribute(ClientConstants.THEME_KEY, from.getKey());
 		to.setAttribute(ClientConstants.THEME_NAME, from.getName());
+		to.setAttribute(ClientConstants.THEME_ORDER, from.getOrder());
 	}
 
 	private static void copyValues(ListGridRecord from, ThemeSer to) {
 
 		to.setKey(from.getAttributeAsString(ClientConstants.THEME_KEY));
 		to.setName(from.getAttributeAsString(ClientConstants.THEME_NAME));
+		to.setOrder(from.getAttributeAsString(ClientConstants.THEME_ORDER));
 	}
 
 }

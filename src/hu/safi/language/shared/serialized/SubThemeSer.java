@@ -9,6 +9,8 @@ public class SubThemeSer extends ResultSer implements IsSerializable {
 	private String name;
 
 	private String lang;
+	
+	private String order;
 
 	public String getKey() {
 		return key;
@@ -32,6 +34,14 @@ public class SubThemeSer extends ResultSer implements IsSerializable {
 
 	public void setLang(String lang) {
 		this.lang = lang;
+	}
+
+	public String getOrder() {
+		return order;
+	}
+
+	public void setOrder(String order) {
+		this.order = order;
 	}
 
 }
