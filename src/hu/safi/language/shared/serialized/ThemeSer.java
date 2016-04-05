@@ -10,6 +10,8 @@ public class ThemeSer extends ResultSer implements IsSerializable {
 
 	private String order;
 	
+	private String mode;
+	
 	public String getKey() {
 		return key;
 	}
@@ -32,6 +34,14 @@ public class ThemeSer extends ResultSer implements IsSerializable {
 
 	public void setOrder(String order) {
 		this.order = order;
+	}
+
+	public String getMode() {
+		return mode;
+	}
+
+	public void setMode(String mode) {
+		this.mode = mode;
 	}
 
 }

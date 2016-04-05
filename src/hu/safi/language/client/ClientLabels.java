@@ -6,7 +6,8 @@ public class ClientLabels {
 	public static final String THEME_KEY = "Kulcs";
 	public static final String THEME_NAME = "Téma";
 	public static final String THEME_ORDER = "Sorrend";
-
+	public static final String THEME_MODE = "Mód";
+	
 	public static final String SUBTHEME = "Altémák";
 	public static final String SUBTHEME_KEY = "Kulcs";
 	public static final String SUBTHEME_NAME = "Altéma";
@@ -26,6 +27,10 @@ public class ClientLabels {
 	public static final String ITEM_FROM = "Eredeti";
 	public static final String ITEM_TO = "Fordítás";
 
+	public static final String MODE = "Mód";
+	public static final String MODE_KID = "Gyerek";
+	public static final String MODE_ADULT = "Felnőtt";
+	
 	public static final String CODE = "Kód";
 	public static final String ADD = "Új";
 	public static final String OK = "Rendben";

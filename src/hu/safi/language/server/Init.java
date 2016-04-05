@@ -3,6 +3,7 @@
 
 package hu.safi.language.server;
 
+import hu.safi.language.server.data.Angol_szavak_1;
 import hu.safi.language.server.data.Angol_szavak_es_kifejezesek_1;
 import hu.safi.language.server.data.Angol_szavak_es_kifejezesek_2;
 import hu.safi.language.server.data.Angol_szavak_es_kifejezesek_3;
@@ -52,8 +53,8 @@ public class Init extends HttpServlet {
 		try {
 
 			Boolean needLoad = false;
-/*			
-			Query loads = pm.newQuery(Load.class);
+			
+/*			Query loads = pm.newQuery(Load.class);
 			loads.deletePersistentAll(); Load load = new Load(true);
 			pm.makePersistent(load);
 */			 
@@ -73,10 +74,13 @@ public class Init extends HttpServlet {
 				Query themes = pm.newQuery(Theme.class);
 				themes.deletePersistentAll();
 
-				Theme theme1 = new Theme(ServerConstants.THEME1,"1");
+				Theme theme0 = new Theme(ServerConstants.THEME0,"1",Constants.MODE_KID);
+				pm.makePersistent(theme0);
+
+				Theme theme1 = new Theme(ServerConstants.THEME1,"1",Constants.MODE_ADULT);
 				pm.makePersistent(theme1);
 
-				Theme theme2 = new Theme(ServerConstants.THEME2,"2");
+				Theme theme2 = new Theme(ServerConstants.THEME2,"2",Constants.MODE_ADULT);
 				pm.makePersistent(theme2);
 
 				Query subThemes = pm.newQuery(SubTheme.class);
@@ -87,6 +91,10 @@ public class Init extends HttpServlet {
 				List<Theme> themeList = (List<Theme>) pm.newQuery(queryTheme).execute();
 				if (!themeList.isEmpty()) {
 					for (Theme t : themeList) {
+						if (t.getName().equals(ServerConstants.THEME0)) {
+							SubTheme subTheme1 = new SubTheme(t.getKey(), ServerConstants.THEME0_SUBTHEME1, Constants.EN, "1");
+							pm.makePersistent(subTheme1);
+						}
 						if (t.getName().equals(ServerConstants.THEME1)) {
 							SubTheme subTheme1 = new SubTheme(t.getKey(), ServerConstants.THEME1_SUBTHEME1, Constants.EN, "1");
 							pm.makePersistent(subTheme1);
@@ -112,6 +120,8 @@ public class Init extends HttpServlet {
 
 				Query items = pm.newQuery(Item.class);
 				items.deletePersistentAll();
+
+				Angol_szavak_1 angol_szavak_1 = new Angol_szavak_1(pm);
 
 				Angol_szavak_es_kifejezesek_1 angol_szavak_es_kifejezesek_1 = new Angol_szavak_es_kifejezesek_1(pm);
 				Angol_szavak_es_kifejezesek_2 angol_szavak_es_kifejezesek_2 = new Angol_szavak_es_kifejezesek_2(pm);

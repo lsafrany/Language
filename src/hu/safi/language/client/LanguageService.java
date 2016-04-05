@@ -18,7 +18,7 @@ public interface LanguageService extends RemoteService {
 
 	String codecheck(String code) throws IllegalArgumentException;
 
-	List<ThemeSer> themes() throws IllegalArgumentException;
+	List<ThemeSer> themes(String mode) throws IllegalArgumentException;
 
 	ThemeSer addTheme(ThemeSer themeSer) throws IllegalArgumentException, ExceptionSer;
 

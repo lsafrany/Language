@@ -2,6 +2,10 @@ package hu.safi.language.server;
 
 public class ServerConstants {
 
+	public static final String THEME0 = "Angol szavak";
+	
+	public static final String THEME0_SUBTHEME1 = "Első osztály";
+
 	public static final String THEME1 = "Angol szavak és kifejezések";
 	
 	public static final String THEME1_SUBTHEME1 = "Első rész";

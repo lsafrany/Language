@@ -7,7 +7,8 @@ public class ClientConstants {
 	public static final String THEME_KEY = "ThemeKey";
 	public static final String THEME_NAME = "ThemeName";
 	public static final String THEME_ORDER = "ThemeOrder";
-
+	public static final String THEME_MODE = "ThemeMode";
+	
 	public static final String SUBTHEME_KEY = "SubThemeKey";
 	public static final String SUBTHEME_NAME = "SubThemeName";
 	public static final String SUBTHEME_LANG = "SubThemeLang";

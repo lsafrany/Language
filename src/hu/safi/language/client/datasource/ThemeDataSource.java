@@ -40,11 +40,15 @@ public class ThemeDataSource extends GwtRpcDataSource {
 		field.setHidden(true);
 		addField(field);
 
+		field = new DataSourceTextField(ClientConstants.THEME_MODE, ClientLabels.THEME_MODE);		
+		field.setHidden(true);
+		addField(field);
+
 	}
 
 	@Override
 	protected void executeFetch(final String requestId, final DSRequest request, final DSResponse response) {
-		languageService.themes(new AsyncCallback<List<ThemeSer>>() {
+		languageService.themes(request.getAttributeAsString(ClientConstants.THEME_MODE), new AsyncCallback<List<ThemeSer>>() {
 			public void onFailure(Throwable caught) {
 				response.setStatus(RPCResponse.STATUS_FAILURE);
 				processResponse(requestId, response);
@@ -72,6 +76,7 @@ public class ThemeDataSource extends GwtRpcDataSource {
 		ListGridRecord rec = new ListGridRecord(data);
 		ThemeSer themeSer = new ThemeSer();
 		copyValues(rec, themeSer);
+		themeSer.setMode(request.getAttributeAsString(ClientConstants.THEME_MODE));
 		languageService.addTheme(themeSer, new AsyncCallback<ThemeSer>() {
 			public void onFailure(Throwable caught) {
 				response.setStatus(DSResponse.STATUS_FAILURE);
@@ -104,6 +109,7 @@ public class ThemeDataSource extends GwtRpcDataSource {
 		to.setAttribute(ClientConstants.THEME_KEY, from.getKey());
 		to.setAttribute(ClientConstants.THEME_NAME, from.getName());
 		to.setAttribute(ClientConstants.THEME_ORDER, from.getOrder());
+		to.setAttribute(ClientConstants.THEME_MODE, from.getMode());
 	}
 
 	private static void copyValues(ListGridRecord from, ThemeSer to) {
@@ -111,6 +117,7 @@ public class ThemeDataSource extends GwtRpcDataSource {
 		to.setKey(from.getAttributeAsString(ClientConstants.THEME_KEY));
 		to.setName(from.getAttributeAsString(ClientConstants.THEME_NAME));
 		to.setOrder(from.getAttributeAsString(ClientConstants.THEME_ORDER));
+		to.setMode(from.getAttributeAsString(ClientConstants.THEME_MODE));
 	}
 
 }

@@ -15,7 +15,7 @@ public interface LanguageServiceAsync {
 
 	void codecheck(String code, AsyncCallback<String> callback) throws IllegalArgumentException;
 
-	void themes(AsyncCallback<List<ThemeSer>> callback) throws IllegalArgumentException;
+	void themes(String mode,AsyncCallback<List<ThemeSer>> callback) throws IllegalArgumentException;
 
 	void addTheme(ThemeSer themeSer, AsyncCallback<ThemeSer> callback) throws IllegalArgumentException;
 

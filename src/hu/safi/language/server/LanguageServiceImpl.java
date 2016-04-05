@@ -33,14 +33,17 @@ public class LanguageServiceImpl extends RemoteServiceServlet implements Languag
 		return result;
 	}
 
-	public ArrayList<ThemeSer> themes() throws IllegalArgumentException {
+	public ArrayList<ThemeSer> themes(String mode) throws IllegalArgumentException {
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		ArrayList<ThemeSer> themes = new ArrayList<ThemeSer>();
 		try {
 			Query query = pm.newQuery("select from " + Theme.class.getName());
+			query.setFilter("(mode == pMode)");
+			query.declareParameters("String pMode");
+
 			@SuppressWarnings("unchecked")
-			List<Theme> list = (List<Theme>) pm.newQuery(query).execute();
+			List<Theme> list = (List<Theme>) pm.newQuery(query).execute(mode);
 			if (!list.isEmpty()) {
 				for (Theme t : list) {
 					ThemeSer themeSer = new ThemeSer();
@@ -73,7 +76,7 @@ public class LanguageServiceImpl extends RemoteServiceServlet implements Languag
 				count = list.size();
 			}
 			count++;
-			Theme theme = new Theme(themeSer.getName(),count.toString());
+			Theme theme = new Theme(themeSer.getName(),count.toString(),themeSer.getMode());
 			pm.makePersistent(theme);
 			themeSer.setKey(theme.getKey().toString());
 			pm.flush();

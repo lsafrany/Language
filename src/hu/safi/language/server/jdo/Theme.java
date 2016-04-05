@@ -19,9 +19,13 @@ public class Theme {
 	@Persistent
 	private String order;
 
-	public Theme(String name,String order) {
+	@Persistent
+	private String mode;
+
+	public Theme(String name,String order,String mode) {
 		this.name = name;
 		this.order = order;
+		this.mode = mode;
 	}
 
 	public Key getKey() {
@@ -43,5 +47,13 @@ public class Theme {
 	public void setOrder(String order) {
 		this.order = order;
 	}
-	
+
+	public String getMode() {
+		return mode;
+	}
+
+	public void setMode(String mode) {
+		this.mode = mode;
+	}
+
 }

@@ -1,5 +1,7 @@
 package hu.safi.language.client;
 
+import java.util.LinkedHashMap;
+
 import hu.safi.language.client.datasource.ItemDataSource;
 import hu.safi.language.client.datasource.SubThemeDataSource;
 import hu.safi.language.client.datasource.ThemeDataSource;
@@ -26,8 +28,12 @@ import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.PasswordItem;
+import com.smartgwt.client.widgets.form.fields.SelectItem;
+import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
+import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridField;
+import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.smartgwt.client.widgets.grid.events.DataArrivedEvent;
 import com.smartgwt.client.widgets.grid.events.DataArrivedHandler;
 import com.smartgwt.client.widgets.grid.events.RecordClickEvent;
@@ -74,10 +80,21 @@ public class Language implements EntryPoint {
 		themeGrid.setSortField(ClientConstants.THEME_ORDER);
 		themeGrid.setShowAllRecords(true);
 		
+	    DynamicForm form = new DynamicForm();  
+		LinkedHashMap<String, String> valueMap = new LinkedHashMap<String, String>();
+		valueMap.put(Constants.MODE_KID,ClientLabels.MODE_KID);
+		valueMap.put(Constants.MODE_ADULT,ClientLabels.MODE_ADULT);
+	    final SelectItem mode = new SelectItem();  
+	    mode.setTitle(ClientLabels.MODE);
+	    mode.setValueMap(valueMap);
+	    mode.setDefaultToFirstOption(true);
+	    form.setFields(mode);
+
 		final DataSource themeDataSource = new ThemeDataSource() {
 			@Override
 			protected Object transformRequest(DSRequest dsRequest) {
 				DisplayRequest.processStart();
+				dsRequest.setAttribute(ClientConstants.THEME_MODE, mode.getValueAsString());
 				return super.transformRequest(dsRequest);
 			}
 
@@ -113,6 +130,7 @@ public class Language implements EntryPoint {
 
 		subThemeGrid.setFields(nameGridField,langGridField);
 		
+
 		final DataSource subThemeDataSource = new SubThemeDataSource() {
 			@Override
 			protected Object transformRequest(DSRequest dsRequest) {
@@ -139,6 +157,11 @@ public class Language implements EntryPoint {
 		buttonsLayout.setWidth("20%");
 		buttonsLayout.setDefaultLayoutAlign(Alignment.CENTER);
 		buttonsLayout.setAlign(VerticalAlignment.CENTER);
+
+	    buttonsLayout.addMember(form);
+
+	    Label modeemptyLabel = new Label("&nbsp;&nbsp");
+		buttonsLayout.addMember(modeemptyLabel);
 
 		final IButton addthemaButton = new IButton(ClientLabels.ADD_THEME);
 		if (add)
@@ -244,6 +267,16 @@ public class Language implements EntryPoint {
 			}
 		});
 
+		mode.addChangedHandler(new ChangedHandler() {
+			public void onChanged(ChangedEvent event) {
+				themeGrid.invalidateCache();
+				themeGrid.fetchData();
+				subThemeGrid.setData(new ListGridRecord());
+				listButton.setDisabled(true);
+				testButton.setDisabled(true);
+			}
+		});
+		
 		return mainLayout;
 	}
 
@@ -383,7 +416,7 @@ public class Language implements EntryPoint {
 		editForm.setColWidths("15%", "*");
 		editForm.setDataSource(dataSource);
 		editForm.setUseAllDataSourceFields(true);
-
+			
 		editForm.editNewRecord();
 
 		HLayout labelLayout = new HLayout();
