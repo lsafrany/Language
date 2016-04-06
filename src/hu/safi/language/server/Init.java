@@ -74,13 +74,13 @@ public class Init extends HttpServlet {
 				Query themes = pm.newQuery(Theme.class);
 				themes.deletePersistentAll();
 
-				Theme theme0 = new Theme(ServerConstants.THEME0,"1",Constants.MODE_KID);
+				Theme theme0 = new Theme(ServerConstants.THEME0,"1",Constants.MODE_BEGINNER);
 				pm.makePersistent(theme0);
 
-				Theme theme1 = new Theme(ServerConstants.THEME1,"1",Constants.MODE_ADULT);
+				Theme theme1 = new Theme(ServerConstants.THEME1,"1",Constants.MODE_ADVANCED);
 				pm.makePersistent(theme1);
 
-				Theme theme2 = new Theme(ServerConstants.THEME2,"2",Constants.MODE_ADULT);
+				Theme theme2 = new Theme(ServerConstants.THEME2,"2",Constants.MODE_ADVANCED);
 				pm.makePersistent(theme2);
 
 				Query subThemes = pm.newQuery(SubTheme.class);

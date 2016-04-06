@@ -82,8 +82,8 @@ public class Language implements EntryPoint {
 		
 	    DynamicForm form = new DynamicForm();  
 		LinkedHashMap<String, String> valueMap = new LinkedHashMap<String, String>();
-		valueMap.put(Constants.MODE_KID,ClientLabels.MODE_KID);
-		valueMap.put(Constants.MODE_ADULT,ClientLabels.MODE_ADULT);
+		valueMap.put(Constants.MODE_BEGINNER,ClientLabels.MODE_BEGINNER);
+		valueMap.put(Constants.MODE_ADVANCED,ClientLabels.MODE_ADVANCED);
 	    final SelectItem mode = new SelectItem();  
 	    mode.setTitle(ClientLabels.MODE);
 	    mode.setValueMap(valueMap);

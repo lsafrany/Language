@@ -39,6 +39,10 @@ public class Angol_szavak_1 {
 					Item item14 = new Item(s.getKey(), "alma", "apple");
 					Item item15 = new Item(s.getKey(), "banán", "banana");
 					
+					Item item16 = new Item(s.getKey(), "ház", "house");
+					Item item17 = new Item(s.getKey(), "fiú", "boy");
+					Item item18 = new Item(s.getKey(), "lány", "girl");
+					
 					pm.makePersistent(item1);
 					pm.makePersistent(item2);
 					pm.makePersistent(item3);
@@ -57,6 +61,10 @@ public class Angol_szavak_1 {
 					pm.makePersistent(item14);
 					pm.makePersistent(item15);
 					
+					pm.makePersistent(item16);
+					pm.makePersistent(item17);
+					pm.makePersistent(item18);
+
 				}
 			}
 		}

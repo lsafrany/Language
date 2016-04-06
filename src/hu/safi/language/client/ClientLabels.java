@@ -28,8 +28,8 @@ public class ClientLabels {
 	public static final String ITEM_TO = "Fordítás";
 
 	public static final String MODE = "Mód";
-	public static final String MODE_KID = "Gyerek";
-	public static final String MODE_ADULT = "Felnőtt";
+	public static final String MODE_BEGINNER = "Kezdő";
+	public static final String MODE_ADVANCED = "Haladó";
 	
 	public static final String CODE = "Kód";
 	public static final String ADD = "Új";
